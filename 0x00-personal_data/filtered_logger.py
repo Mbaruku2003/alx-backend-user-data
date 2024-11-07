@@ -38,6 +38,7 @@ def filter_datum(fields: List[str],
     pattern = f"({'|'.join(fields)})=([^ {separator}]+)"
     return re.sub(pattern, f"\\1={redaction}", message)
 
+
 def get_logger() -> logging.Logger:
     """returns a logging.logger object."""
 
