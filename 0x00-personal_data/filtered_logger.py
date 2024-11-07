@@ -61,8 +61,23 @@ def get_db() -> MySQLConnection:
     password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
     host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
     db_name = os.getenv("PERSONAL_DATA_DB_NAME")
-    cnx = mysql.connector.connect(user=username,
-                                  password=password,
-                                  host=host,
-                                  database=db_name)
+    cnx = mysql.connector.connection.MySQLConnection(user=username,
+                                                     password=password,
+                                                     host=host,
+                                                     database=db_name)
     return cnx
+
+
+def main():
+    """obtain the database connectin using get_db and retreive rows."""
+
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+    field_names = [i[0] fr i in cursor.description]
+    logger = get_logger()
+    for row in cursor:
+        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, field_names))
+        logger.info(str_row.strip())
+    cursor.close()
+    db.close()
