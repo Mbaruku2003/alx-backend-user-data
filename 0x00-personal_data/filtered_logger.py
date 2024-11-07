@@ -23,8 +23,10 @@ class RedactingFormatter(logging.Formatter):
         """Where i'll implement the new code."""
 
         record.msg = filter_datum(
-                                  self.fields, self.REDACTION, record.msg, self.SEPARATOR)
+                self.fields, self.REDACTION, record.msg, self.SEPARATOR)
         return super().format(record)
+
+
 def filter_datum(fields: List[str],
                  redaction: str, message: str, separator: str) -> str:
     """Obfuscates field in a log message."""
