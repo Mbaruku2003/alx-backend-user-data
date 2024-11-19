@@ -11,3 +11,23 @@ def _hash_password(password: str) -> bytes:
     salted_password = bcrypt.gensalt()
     encoded_password = bcrypt.hashpw(password.encode('utf-8'), salted_password)
     return encoded_password
+
+
+class Auth:
+    """Auth class to interact with authentication database.
+    """
+    def __init__(self):
+        """Initialize the Auh instance with a DB instance."""
+        
+        self._db = DB()
+
+    def register_user(self, email: str, password: str):
+        """Register a new user by email and passwrd."""
+        try:
+            self.db.find_user_by(email=email)
+            raise ValueError(f"User {email} already exists")
+        except InvalidRequestError:
+            pass
+        hashed_password = _hash_password(password)
+        user = self._db.add_user(email, hashed_password)
+        return user
