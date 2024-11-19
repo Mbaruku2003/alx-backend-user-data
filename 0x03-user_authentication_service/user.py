@@ -9,7 +9,7 @@ Base: Type = declarative_base()
 
 
 class User(Base):  # type: ignore
-    """define table user"""
+    """define table user to be used."""
 
     __tablename__ = "users"
 
