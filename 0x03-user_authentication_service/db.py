@@ -46,11 +46,11 @@ class DB:
         """finds user by arbitrary keyword args."""
 
         try:
-            return self.session.query(User).filter_by(**kwargs).one()
+            return self._session.query(User).filter_by(**kwargs).one()
         except NoResultFound:
-            raise NoResultFound("No user found with the given criteria.")
-        except InvalidRequestError:
-            raise InvalidRequestError("Invalid query arguenments provided")
+            raise NoResultFound("No user found with the criteria.")
+        except InvalidRequestError as e:
+            raise InvalidRequestError(f"Invalid query {e}")
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """update a users attribute."""
