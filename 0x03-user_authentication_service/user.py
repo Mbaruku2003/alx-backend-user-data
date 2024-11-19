@@ -11,7 +11,7 @@ Base = declarative_base()
 class User(Base):
     """define table user"""
 
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     id = Column(Integer, AutoIncrement=True)
     email = Column(String(250), nullable=False)
