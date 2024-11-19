@@ -2,8 +2,7 @@
 """takes in a password and returns bytes."""
 import bcrypt
 from user import User
-from db import DB
-from sqlalchemy.orm.exc import NoResultFound
+import typing
 
 
 def _hash_password(password: str) -> bytes:
