@@ -2,6 +2,8 @@
 """takes in a password and returns bytes."""
 import bcrypt
 from user import User
+from db import DB
+from sqlalchemy.exc import InvalidRequestError
 import typing
 
 
