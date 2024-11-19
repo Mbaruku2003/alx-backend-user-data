@@ -9,7 +9,7 @@ from user import Base, User
 
 class DB:
     """
-    DB class
+    DB class is responsible to interact with database
     """
 
     def __init__(self) -> None:
