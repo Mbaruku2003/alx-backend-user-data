@@ -7,5 +7,5 @@ def _hash_password(password: str) -> bytes:
     """define hashpasswod in bytes."""
 
     salt = bcrypt.gensalt()
-    the_passwd = bcrypt.hashpw(encoding="UTF-8", salt)
+    the_passwd = bcrypt.hashpw(password.encode('utf-8'), salt)
     return the_passwd
