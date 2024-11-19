@@ -21,9 +21,10 @@ class Auth:
     def register_user(email: str, password:str) -> User:
         """registers a user with the email and password."""
 
-        if user hasattr(email):
-            raise ValueError("user {user.email} already exists.""")
-        else:
-            _hash_password(password)
-            self._db = DB()
-            return User
+        try:
+            self._db.find_user_by(email=email)
+            raise ValueError(f"user {email} already exists")
+        except NoResultFound:
+            hashed_password = _hashed_password(password).decode('utf-8')
+            new_user = self._db.add_user(email=email, hashed_password=hashed_password)
+            return new_user
