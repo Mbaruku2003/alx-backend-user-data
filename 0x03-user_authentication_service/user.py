@@ -2,11 +2,13 @@
 """Define a way to know a user."""
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import declarative_base
+from typing import Any, Type
 
 
-Base = declarative_base()
+Base: Type = declarative_base()
 
-class User(Base):
+
+class User(Base):  # type: ignore
     """define table user"""
 
     __tablename__ = "users"
