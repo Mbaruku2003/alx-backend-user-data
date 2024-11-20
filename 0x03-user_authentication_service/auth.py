@@ -20,7 +20,7 @@ class Auth:
     """
     def __init__(self):
         """Initialize the Auh instance with a DB instance."""
-        
+
         self._db = DB()
 
     def register_user(self, email: str, password: str):
@@ -33,3 +33,14 @@ class Auth:
         hashed_password = _hash_password(password)
         user = self._db.add_user(email, hashed_password)
         return user
+
+    def valid_login(email: str, password: str):
+        """expects email and pasword giving back a boolean."""
+
+        try:
+            user = self._db.find_user(email=email)
+            if bcrypt.checkpw(password.encode('utf-8'), user.hashed_password):
+                return true
+        except NoResultFound:
+            pass
+        return False
