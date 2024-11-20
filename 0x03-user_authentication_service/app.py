@@ -27,8 +27,8 @@ def users():
         password = the_password.strip()
         try:
             AUTH.register_user(email, password)
-            message = jsonify("email": email,
-                              "message": "user created")
+            message = jsonify({"email": email,
+                              "message": "user created"})
             return message
         except Exception:
             return jsonify({"message": "email already registered"})
