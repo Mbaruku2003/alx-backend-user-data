@@ -37,7 +37,7 @@ class Auth:
         user = self._db.add_user(email, hashed_password)
         return user
 
-    def valid_login(email: str, password: str -> User):
+    def valid_login(email: str, password: str) -> User:
         """expects email and pasword giving back a boolean."""
 
         try:
