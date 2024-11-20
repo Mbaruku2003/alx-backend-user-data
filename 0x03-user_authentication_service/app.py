@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Define an app using flask."""
-from flask import Flask, jsonify, response
+from flask import Flask, jsonify, Response
 
 
 app = Flask(__name__)
 
 
 @app.route("/", methods=["Get"])
-def welcome():
+def welcome() -> Response:
     """Get  a Json payload with a welcome message."""
 
     return jsonify({"message": "Bienvenue"})
