@@ -9,15 +9,15 @@ AUTH = Auth()
 app = Flask(__name__)
 
 
-@app.route("/")
-def welcome() -> Response:
+@app.route("/", methods=["GET"])
+def welcome():
     """Get  a Json payload with a welcome message."""
 
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route("/users", methods=["POST"])
-def users() -> Response:
+def users():
     """Register users."""
 
     if request.method == "POST":
