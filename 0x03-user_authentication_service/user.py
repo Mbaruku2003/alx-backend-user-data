@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from typing import Any, Type
 
 
-Base: Type = declarative_base()
+Base = declarative_base()
 
 
 class User(Base):  # type: ignore
