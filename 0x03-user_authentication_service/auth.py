@@ -3,7 +3,7 @@
 import bcrypt
 from user import User
 from db import DB
-from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 import typing
 
 
@@ -23,24 +23,24 @@ class Auth:
 
         self._db = DB()
 
-    def register_user(self, email: str, password: str):
+    def register_user(self, email: str, password: str) -> User:
         """Register a new user by email and passwrd."""
         try:
-            self.db.find_user_by(email=email)
+            self._db.find_user_by(email=email)
             raise ValueError(f"User {email} already exists")
-        except InvalidRequestError:
+        except NoResultFound:
             pass
         hashed_password = _hash_password(password)
         user = self._db.add_user(email, hashed_password)
         return user
 
-    def valid_login(email: str, password: str):
+    def valid_login(email: str, password: str -> User):
         """expects email and pasword giving back a boolean."""
 
         try:
-            user = self._db.find_user(email=email)
+            user = self._db.find_user_by(email=email)
             if bcrypt.checkpw(password.encode('utf-8'), user.hashed_password):
-                return true
+                return True
         except NoResultFound:
             pass
         return False
