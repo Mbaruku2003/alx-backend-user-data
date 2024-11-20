@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """takes in a password and returns bytes."""
 import bcrypt
+import uuid
 from user import User
 from db import DB
 from sqlalchemy.orm.exc import NoResultFound
@@ -44,3 +45,8 @@ class Auth:
         except NoResultFound:
             pass
         return False
+
+    def _generate_uuid() -> str:
+        """Generate a new uuid."""
+
+        return str(uuid.uuid4())
